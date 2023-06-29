@@ -11,6 +11,7 @@ use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Resource;
 use Spatie\RouteAttributes\Attributes\RouteAttribute;
+use Spatie\RouteAttributes\Attributes\RouteGroups;
 use Spatie\RouteAttributes\Attributes\ScopeBindings;
 use Spatie\RouteAttributes\Attributes\Where;
 
@@ -87,6 +88,19 @@ class ClassRouteAttributes
         }
 
         return $groups;
+    }
+
+    /**
+     * @psalm-suppress NoInterfaceProperties
+     */
+    public function routeGroups(): array
+    {
+        /** @var RouteGroups $attribute */
+        if (! $attribute = $this->getAttribute(RouteGroups::class)) {
+            return [];
+        }
+
+        return $attribute->toArray();
     }
 
     /**

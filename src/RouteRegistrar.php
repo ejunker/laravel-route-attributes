@@ -162,6 +162,9 @@ class RouteRegistrar
                 $this->setScopeBindingsIfAvailable($scopeBindingsAttribute, $route, $classRouteAttributes);
 
 
+                $this->setRouteGroupsIfAvailable($classRouteAttributes, $route);
+
+
                 $this->setWheresIfAvailable($classRouteAttributes, $wheresAttributes, $route);
 
 
@@ -210,6 +213,21 @@ class RouteRegistrar
         $scopeBindingsAttribute = $method->getAttributes(ScopeBindings::class, ReflectionAttribute::IS_INSTANCEOF)[0] ?? null;
 
         return [$attributes, $wheresAttributes, $defaultAttributes, $fallbackAttributes, $scopeBindingsAttribute];
+    }
+
+    /**
+     * @param \Illuminate\Routing\Route $route
+     * @param ClassRouteAttributes $classRouteAttributes
+     * @return void
+     */
+    public function setRouteGroupsIfAvailable(ClassRouteAttributes $classRouteAttributes, \Illuminate\Routing\Route $route): void
+    {
+        $groups = $classRouteAttributes->routeGroups();
+        if (! empty($groups)) {
+            $actionArray = \Illuminate\Routing\RouteGroup::merge($groups, $route->getAction(), prependExistingPrefix: false);
+            $route->setAction($actionArray);
+            $route->prefix($actionArray['prefix']);
+        }
     }
 
     /**
