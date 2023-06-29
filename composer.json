@@ -1,11 +1,11 @@
 {
-    "name": "spatie/laravel-route-attributes",
+    "name": "ejunker/laravel-route-attributes",
     "description": "Auto register routes using PHP attributes",
     "keywords": [
         "spatie",
         "laravel-route-attributes"
     ],
-    "homepage": "https://github.com/spatie/laravel-route-attributes",
+    "homepage": "https://github.com/ejunker/laravel-route-attributes",
     "license": "MIT",
     "authors": [
         {
