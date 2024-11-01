@@ -25,7 +25,7 @@ class TestCase extends Orchestra
             ->useRootNamespace('Spatie\RouteAttributes\Tests\\');
     }
 
-    public function getTestPath(string $directory = null): string
+    public function getTestPath(?string $directory = null): string
     {
         return __DIR__ . ($directory ? DIRECTORY_SEPARATOR . $directory : '');
     }
